@@ -3,18 +3,29 @@ package com.revature.models;
 public class BankAccount {
 
 	private int id;
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
 	private int accountNumber;
 	private double balance;
+	private int userid;
 
 	public BankAccount() {
 		super();
 
 	}
 
-	public BankAccount(int id, int accountNumber, double balance) {
+	public BankAccount(int id, int accountNumber, double balance, int userid) {
 		this.id = id;
 		this.accountNumber = accountNumber;
 		this.balance = balance;
+		this.userid = userid;
 
 	}
 
@@ -79,7 +90,8 @@ public class BankAccount {
 
 	@Override
 	public String toString() {
-		return "BankAccount [id=" + id + ", accountNumber=" + accountNumber + ", balance=" + balance + "]";
+		return "BankAccount [id=" + id + ", accountNumber=" + accountNumber + ", balance=" + balance + ", userid="
+				+ userid + "]";
 	}
 
 }
