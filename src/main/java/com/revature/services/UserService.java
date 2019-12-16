@@ -27,4 +27,8 @@ public class UserService {
 
 	}
 
+	public User getUserByFnameAndPassword(String fname, String password) {
+		// TODO Auto-generated method stub
+		return repository.getUserByFnameAndPassword(fname, password);
+	}
 }

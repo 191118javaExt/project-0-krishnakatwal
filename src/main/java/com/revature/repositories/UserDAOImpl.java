@@ -33,7 +33,7 @@ public class UserDAOImpl implements UserDAO {
 				int id = rs.getInt("user_id");
 				String first_name = rs.getString("first_name");
 				String last_name = rs.getString("last_name");
-				String password = rs.getString("email");
+				String password = rs.getString("password");
 				boolean isEmployee = rs.getBoolean("isEmployee");
 				boolean isAdmin = rs.getBoolean("isAdmin");
 
@@ -54,7 +54,7 @@ public class UserDAOImpl implements UserDAO {
 	public boolean addUser(User u) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
-			String sql = "INSERT INTO users (first_name, last_name, password, isemployee, isadmin) "
+			String sql = "INSERT INTO project0.users (first_name, last_name, user_password, is_employee, is_admin) "
 					+ "VALUES (?, ?, ?, ?, ?);";
 
 			PreparedStatement stm = conn.prepareStatement(sql);
@@ -128,6 +128,40 @@ public class UserDAOImpl implements UserDAO {
 		}
 
 		return true;
+	}
+	
+	
+	public User getUserByFnameAndPassword(String fname,String password) {
+		User user = null;
+		
+		try (Connection con = ConnectionUtil.getConnection()) {
+				
+			String sql = "SELECT * FROM project0.users WHERE fname = ? AND password = ?;";
+			
+			PreparedStatement stmt = con.prepareStatement(sql);
+			
+			stmt.setString(1, fname);
+			stmt.setString(2, password);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				int user_id = rs.getInt("user_id");
+				String firstname = rs.getString("fname");
+				String lastname = rs.getString("lname");
+				String password1 = rs.getString("password");
+				boolean isEmployee = rs.getBoolean("is_employee");
+				boolean isAdmin = rs.getBoolean("is_admin");
+				user = new User(user_id, firstname, lastname, password1, isEmployee,isAdmin);
+				
+			}
+			
+			rs.close();
+		} catch(SQLException e) {
+			logger.warn("Unable to retrieve the user by using first name and password", e);
+		}
+		//System.out.println(user);
+		return user;
 	}
 
 }

@@ -23,17 +23,17 @@ public class BankApp {
 		User u = null;
 		while (find) {
 			options();
-			int input = '\0';
+			int input = Integer.parseInt(sc.nextLine()); 
 			switch (input) {
 			case 1:
 				u = forNewUser();
 				us.addUser(u);
 				break;
 			case 2:
-				User et = findUserInDB();
-				if (checkUserInDB(et)) {
+				User u1 = findUserInDB();
+				if (checkUserInDB(u1)) {
 
-					logIn(et);
+					logIn(u1);
 				}
 				find = false;
 				break;
@@ -50,27 +50,27 @@ public class BankApp {
 
 	}
 
-	private static void logIn(User et) {
+	private static void logIn(User u1) {
 
 		System.out.println("====================");
 		System.out.println("Enter your username");
 		System.out.println("enter your password ");
 		System.out.println("======================");
 
-		int option = '\0';
+		int option = Integer.parseInt(sc.nextLine()); ;
 		switch (option) {
 		case 1:
 			System.out.println("");
 			System.exit(0);
 			break;
 		case 2:
-			deposit(et);
+			deposit(u1);
 			break;
 		case 3:
-			withdraw(et);
+			withdraw(u1);
 			break;
 		case 4:
-			transfer(et);
+			transfer(u1);
 			break;
 		default:
 			System.out.println("\"Invalid option!! please enter again\"");
@@ -78,19 +78,19 @@ public class BankApp {
 		}
 	}
 
-	private static void transfer(User et) {
+	private static void transfer(User u1) {
+		// TODO Auto-generated method stub
+		
+
+	}
+
+	private static void withdraw(User u1) {
 		// TODO Auto-generated method stub
 
 	}
 
-	private static void withdraw(User et) {
+	private static void deposit(User u1) {
 		// TODO Auto-generated method stub
-
-	}
-
-	private static void deposit(User et) {
-		// TODO Auto-generated method stub
-
 	}
 
 	private static boolean checkUserInDB(User et) {
@@ -108,25 +108,22 @@ public class BankApp {
 	}
 
  private static User findUserInDB() {
-//	
-//String firstname;
-//			String password;
-//			User u;
-//			
-//			do {
-//				System.out.println("Enter your first name: ");
-//				 firstname = sc.nextLine();
-//				System.out.println("Enter your password: ");
-//				 password = sc.nextLine();
-//				System.out.println("Checking user in DataBase");
-//				u = us.getUserByUserNameAndPassword(firstname, password);
-//				
-//		}while(u == null);
-	return null;
+	    String fname;
+		String password;
+		User u;
+		do {
+			System.out.println("Enter your first name: ");
+			 fname = sc.nextLine();
+			System.out.println("Enter your password: ");
+			 password = sc.nextLine();
+			System.out.println("Checking user in DataBase");
+			u = us.getUserByFnameAndPassword(fname, password);
+			
+		}while(u == null);
+		return u;
 	}
 	
 	private static User forNewUser() {
-		// TODO Auto-generated method stub
 		System.out.println(" Your First Name: ");
 		String firstname = sc.nextLine();
 
@@ -139,9 +136,22 @@ public class BankApp {
 
 		System.out.println("Re-enter Password:");
 		String password2 = sc.nextLine();
+		
+		
+		System.out.println("Are you an Employee? Please Enter Yes or No");
+		String input = sc.nextLine();
 		boolean isemployee = false;
-		String isemployee1;
-		return null;
+		if(input.equalsIgnoreCase("Yes")){
+			isemployee = true;
+		} 
+		System.out.println("Are you an Admin? Please Enter Yes or No");
+		String input1 = sc.nextLine();
+		boolean isadmin = false;
+		if(input1.equalsIgnoreCase("Yes")){
+			isadmin= true;
+		}
+		
+		return new User(0,firstname,lastname,password1, isemployee, isadmin);
 	}
 
 	private static void options() {

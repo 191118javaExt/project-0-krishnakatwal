@@ -1,0 +1,42 @@
+2019-12-16 12:14:50 WARN  ConnectionUtil:25 - Unable to obtain connection to database
+java.sql.SQLException: No suitable driver found for jdbc:postgresql://localhost:5432/
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.revature.util.ConnectionUtil.getConnection(ConnectionUtil.java:23)
+	at com.revature.repositories.UserDAOImpl.addUser(UserDAOImpl.java:55)
+	at com.revature.services.UserService.addUser(UserService.java:18)
+	at com.revature.BankApp.findUser(BankApp.java:31)
+	at com.revature.BankApp.start(BankApp.java:19)
+	at com.revature.Driver.main(Driver.java:9)
+2019-12-16 12:18:52 WARN  ConnectionUtil:25 - Unable to obtain connection to database
+org.postgresql.util.PSQLException: FATAL: password authentication failed for user "postgres"
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:520)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:141)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:192)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:211)
+	at org.postgresql.Driver.makeConnection(Driver.java:458)
+	at org.postgresql.Driver.connect(Driver.java:260)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.revature.util.ConnectionUtil.getConnection(ConnectionUtil.java:23)
+	at com.revature.repositories.UserDAOImpl.addUser(UserDAOImpl.java:55)
+	at com.revature.services.UserService.addUser(UserService.java:18)
+	at com.revature.BankApp.findUser(BankApp.java:31)
+	at com.revature.BankApp.start(BankApp.java:19)
+	at com.revature.Driver.main(Driver.java:9)
+2019-12-16 12:38:54 WARN  UserDAOImpl:72 - Unable to add user
+org.postgresql.util.PSQLException: ERROR: relation "users" does not exist
+  Position: 13
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.UserDAOImpl.addUser(UserDAOImpl.java:68)
+	at com.revature.services.UserService.addUser(UserService.java:18)
+	at com.revature.BankApp.findUser(BankApp.java:31)
+	at com.revature.BankApp.start(BankApp.java:19)
+	at com.revature.Driver.main(Driver.java:9)

@@ -14,4 +14,7 @@ boolean updateUser(User u);
 
 boolean deleteUser(User u);
 
+ User getUserByFnameAndPassword(String fname, String password);
+	// TODO Auto-generated method stub
+
 }
