@@ -7,7 +7,7 @@ import com.revature.repositories.UserDAO;
 import com.revature.repositories.UserDAOImpl;
 
 public class UserService {
-	
+
 	UserDAO repository = new UserDAOImpl();
 
 	public List<User> getUsers() {
@@ -26,4 +26,5 @@ public class UserService {
 		return repository.deleteUser(u);
 
 	}
+
 }

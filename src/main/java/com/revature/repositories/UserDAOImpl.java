@@ -79,19 +79,17 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean updateUser(User u) {
 		int id = u.getId();
-		String first_name =  u.getFirst_name();
-		String last_name =  u.getFirst_name();
-		String password =  u.getPassword();
+		String first_name = u.getFirst_name();
+		String last_name = u.getFirst_name();
+		String password = u.getPassword();
 
-		boolean isEmployee =  u.isEmployee();
-		boolean isAdmin =  u.isAdmin();
-		
+		boolean isEmployee = u.isEmployee();
+		boolean isAdmin = u.isAdmin();
+
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			
-			
-			String sql = "UPDATE public.users SET fname = ?, lname = ?, password = ?, account_id = ?, is_employee = ?, is_admin = ?, is_logged_in = ? WHERE user_id = ?;"; 
-					
-			
+
+			String sql = "UPDATE public.users SET fname = ?, lname = ?, password = ?, account_id = ?, is_employee = ?, is_admin = ?, is_logged_in = ? WHERE user_id = ?;";
+
 			PreparedStatement stm = conn.prepareStatement(sql);
 			stm.setString(1, first_name);
 			stm.setString(2, last_name);
@@ -99,38 +97,37 @@ public class UserDAOImpl implements UserDAO {
 			stm.setBoolean(5, isEmployee);
 			stm.setBoolean(6, isAdmin);
 			stm.setInt(7, id);
-			
-			if(!stm.execute()) {
+
+			if (!stm.execute()) {
 				return false;
 			}
-		} catch(SQLException ex) {
+		} catch (SQLException ex) {
 			logger.warn("Unable to update the user", ex);
 			return false;
 		}
-		
+
 		return true;
-		
+
 	}
+
 	@Override
 	public boolean deleteUser(User u) {
 		int id = u.getId();
 		try (Connection conn = ConnectionUtil.getConnection()) {
-						
-					String sql = "DELETE FROM users"
-					+ "WHERE user_id = ?;"; 
-					
-					PreparedStatement stm = conn.prepareStatement(sql);
-					stm.setInt(1, id);
-					if(!stm.execute()) {
-						return false;
-					}
-				} catch(SQLException e) {
-					logger.warn("Unable to delete the user", e);
-					return false;
-				}
-				
-				return true;	
-	}
 
+			String sql = "DELETE FROM users" + "WHERE user_id = ?;";
+
+			PreparedStatement stm = conn.prepareStatement(sql);
+			stm.setInt(1, id);
+			if (!stm.execute()) {
+				return false;
+			}
+		} catch (SQLException e) {
+			logger.warn("Unable to delete the user", e);
+			return false;
+		}
+
+		return true;
+	}
 
 }
