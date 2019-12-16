@@ -20,14 +20,14 @@ public class BankApp {
 
 	private static void findUser() {
 		boolean find = true;
-		User nw = null;
+		User u = null;
 		while (find) {
 			options();
 			int input = '\0';
 			switch (input) {
 			case 1:
-				nw = forNewUser();
-				us.addUser(nw);
+				u = forNewUser();
+				us.addUser(u);
 				break;
 			case 2:
 				User et = findUserInDB();
@@ -108,8 +108,8 @@ public class BankApp {
 	}
 
  private static User findUserInDB() {
-	
-//			String firstname;
+//	
+//String firstname;
 //			String password;
 //			User u;
 //			
@@ -119,10 +119,10 @@ public class BankApp {
 //				System.out.println("Enter your password: ");
 //				 password = sc.nextLine();
 //				System.out.println("Checking user in DataBase");
-//				//u = us.getUserByUserNameAndPassword(firstname, password);
-				
-		//}while(u == null);
-		return null;
+//				u = us.getUserByUserNameAndPassword(firstname, password);
+//				
+//		}while(u == null);
+	return null;
 	}
 	
 	private static User forNewUser() {
