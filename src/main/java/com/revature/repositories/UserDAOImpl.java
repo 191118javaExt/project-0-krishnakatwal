@@ -89,7 +89,7 @@ public class UserDAOImpl implements UserDAO {
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
-			String sql = "UPDATE public.users SET fname = ?, lname = ?, password = ?, account_id = ?, is_employee = ?, is_admin = ?, is_logged_in = ? WHERE user_id = ?;";
+			String sql = "UPDATE project0.users SET firstname = ?, last_name = ?, user_password = ?, account_id = ?, is_employee = ?, is_admin = ? WHERE user_id = ?;";
 
 			PreparedStatement stm = conn.prepareStatement(sql);
 			stm.setString(1, first_name);
@@ -163,41 +163,42 @@ public class UserDAOImpl implements UserDAO {
 		// System.out.println(user);
 		return user;
 	}
-
-	@Override
-	public BankAccount getUserBankAccount(User u1) {
-
-		BankAccount account = null;
-		int accountId = u1.getAccountId();
-
-		try (Connection con = ConnectionUtil.getConnection()) {
-
-			String sql = "SELECT * FROM accounts WHERE account_id = ? ;";
-
-			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setInt(1, accountId);
-
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				int account_id = rs.getInt("account_id");
-
-				int accountNumber = rs.getInt("account_number");
-				double balance = rs.getDouble("balance");
-
-				int pin = rs.getInt("pin_number");
-
-				account = new BankAccount(account_id, accountNumber, balance, pin);
-
-			}
-
-			rs.close();
-		} catch (SQLException e) {
-			logger.warn("Unable to retrieve user's account", e);
-		}
-
-		return account;
-	}
+//
+//	@Override
+//	public BankAccount getUserBankAccount(User u1) {
+//
+//		BankAccount account = null;
+//		int accountId = u1.getAccountId();
+//
+//		try (Connection con = ConnectionUtil.getConnection()) {
+//
+//			String sql = "SELECT * FROM bankaccount WHERE account_id = ? ;";
+//
+//			PreparedStatement stmt = con.prepareStatement(sql);
+//			stmt.setInt(1, accountId);
+//
+//			ResultSet rs = stmt.executeQuery();
+//
+//			while (rs.next()) {
+//				int accountid = rs.getInt("account_id");
+//
+//				int accountNumber = rs.getInt("account_number");
+//				double balance = rs.getDouble("balance");
+//
+//				int pin = rs.getInt("pin_number");
+//				int status = rs.getInt("status");
+//
+//				account = new BankAccount(accountid, accountNumber, balance, pin, status, 0);
+//
+//			}
+//
+//			rs.close();
+//		} catch (SQLException e) {
+//			logger.warn("Unable to retrieve user's account", e);
+//		}
+//
+//		return account;
+//	}
 
 	@Override
 	public User getUserById(int id) {
@@ -215,9 +216,9 @@ public class UserDAOImpl implements UserDAO {
 
 			while (rs.next()) {
 				int user_id = rs.getInt("user_id");
-				String fname = rs.getString("fname");
-				String lname = rs.getString("lname");
-				String password = rs.getString("password");
+				String fname = rs.getString("first_name");
+				String lname = rs.getString("last_name");
+				String password = rs.getString("user_password");
 
 				boolean isEmployee = rs.getBoolean("is_employee");
 				boolean isAdmin = rs.getBoolean("is_admin");
@@ -231,6 +232,12 @@ public class UserDAOImpl implements UserDAO {
 			logger.warn("Unable to retrieve the user", e);
 		}
 		return user;
+	}
+
+	@Override
+	public BankAccount getUserBankAccount(User u1) {
+	
+		return null;
 	}
 
 }

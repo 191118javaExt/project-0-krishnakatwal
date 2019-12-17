@@ -3,6 +3,7 @@ package com.revature.services;
 import java.util.List;
 
 import com.revature.models.BankAccount;
+import com.revature.models.User;
 import com.revature.repositories.BankAccountDAO;
 import com.revature.repositories.BankAccountDAOImpl;
 
@@ -32,7 +33,21 @@ public class BankAccountService {
 	}
 
 	public BankAccount getAccountBYPinNumber(int pinNumber) {
-		return repository.getAccountIdBYPinNumber(pinNumber);
+		return repository.getAccountIdBYPin(pinNumber);
+	}
+
+	public List<BankAccount> getAllAccountsOfUser(User u) {
+		
+		return repository.getAllAccountofUser(u);
+	}
+
+
+	public BankAccount getAccountById(int id) {
+		return repository.getAccountById( id);
+	}
+
+	public List<BankAccount> getAccountsOfUser(User u) {
+		return repository.getAccountsOfUser(u);
 	}
 	
 }

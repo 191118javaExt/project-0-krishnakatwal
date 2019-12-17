@@ -3,6 +3,7 @@ package com.revature.repositories;
 import java.util.List;
 
 import com.revature.models.BankAccount;
+import com.revature.models.User;
 
 public interface BankAccountDAO {
 
@@ -16,7 +17,14 @@ public interface BankAccountDAO {
 
 	public boolean updateBalanceOfAccount(BankAccount a, double amount);
 
-	BankAccount getAccountIdBYPinNumber(int pinNumber);
+	public BankAccount getAccountIdBYPin(int pin);
+
+	 public List<BankAccount> getAllAccountofUser(User u);
+
+	BankAccount getAccountById(int id);
+
+	List<BankAccount> getAccountsOfUser(User u);
+
 		
 	
 }

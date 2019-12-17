@@ -1,5 +1,6 @@
 package com.revature;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.revature.models.BankAccount;
@@ -53,10 +54,11 @@ public class BankApp {
 
 	private static void logIn(User u1) {
 
-		System.out.println("====================");
-		System.out.println("Enter your username");
-		System.out.println("enter your password ");
-		System.out.println("======================");
+		System.out.println("Enter 1 to Exist");
+		System.out.println("Enter 2 to Deposit");
+		System.out.println("Enter 3 to Withdraw");
+		System.out.println("Enter 4 to Transfer ");
+		System.out.println();
 
 		int option = Integer.parseInt(sc.nextLine());
 		;
@@ -82,8 +84,10 @@ public class BankApp {
 
 //----------------------------------------------------------------------------------------------------------//
 	private static void transfer(User u1) {
-		// TODO Auto-generated method stub
-		BankAccount a = us.getUserBankAccount(u1);
+		displayAccounts(u1);
+		System.out.println("Enter Account id to which you want to deposit.");
+		int id = Integer.parseInt(sc.nextLine());
+		BankAccount a = bs.getAccountById(id);
 		if (a.getStatus() == 1) {
 			System.out.println(
 					"Your Account was canceled.Contact Admin or Employee for more Information.");
@@ -99,7 +103,7 @@ public class BankApp {
 			} else {
 
 				System.out.println("Enter the pin number of the account that you would like to transfer.");
-				int pinNumber = ensureIntegerInput();
+				int pinNumber = ensureIntegerInput(null);
 				BankAccount anotherAccount = bs.getAccountBYPinNumber(pinNumber);
 
 				if (a.getBalance() < amount) {
@@ -119,16 +123,30 @@ public class BankApp {
 
 	}
 
-//------------------------------------------------------------------------------------------
-	private static int ensureIntegerInput() {
-		// TODO Auto-generated method stub
-		return 0;
+//------------------------------------------------------------------------------------------?//
+	private static int ensureIntegerInput(String input) {
+		System.out.println("Enter "+ input);
+		int choice = 0;
+		String ch = sc.nextLine();
+		try {
+			
+			choice = Integer.parseInt(ch);
+		}catch(NumberFormatException e) {
+			System.out.println("Error in changing input to Integer");
+			e.printStackTrace();
+			
+		}
+		
+		return choice;
 	}
 
 	// -----------------------------------------------------------------------------------------------------------//
 	private static void withdraw(User u1) {
-		// TODO Auto-generated method stub
-		BankAccount a = us.getUserBankAccount(u1);
+		displayAccounts(u1);
+		System.out.println("Enter Account id to which you want to deposit.");
+		int id = Integer.parseInt(sc.nextLine());
+		BankAccount a = bs.getAccountById(id);
+		System.out.println();
 		if (a.getStatus() == 1) {
 			System.out.println(
 					"Your Account was canceled. You can't withdraw. Contact Admin or Employee for more Information.");
@@ -145,16 +163,20 @@ public class BankApp {
 			} else {
 				bs.updateBalanceOfAccount(a, (-1 * amount));
 			}
-			BankAccount a1 = us.getUserBankAccount(u1);
+			
 			System.out.println("Congratulation you successfully withdrew $" + amount + " and your current balance is $"
-					+ a1.getBalance());
+					+ a.getBalance());
 		}
 
 	}
 
 //-------------------------------------------------------------------------------------------------------------------------------//
 	private static void deposit(User u1) {
-		BankAccount a = us.getUserBankAccount(u1);
+		displayAccounts(u1);
+		System.out.println("Enter Account id to which you want to deposit.");
+		int id = Integer.parseInt(sc.nextLine());
+		BankAccount a = bs.getAccountById(id);
+		
 		if (a.getStatus() == 1) {
 			System.out.println(
 					"Your Account was canceled. You can't deposit. Contact Admin or Employee for more Information.");
@@ -170,9 +192,9 @@ public class BankApp {
 			} else {
 
 				bs.updateBalanceOfAccount(a, amount);
-				BankAccount a1 = us.getUserBankAccount(u1);
+				
 				System.out.println("Congratulation you successfully deposited $" + amount
-						+ " and your current balance is $" + a1.getBalance());
+						+ " and your current balance is $" + a.getBalance());
 			}
 
 		}
@@ -215,6 +237,7 @@ public class BankApp {
 		User u;
 		do {
 			System.out.println("Enter your first name: ");
+			System.out.println("\n");
 			fname = sc.nextLine();
 			System.out.println("Enter your password: ");
 			password = sc.nextLine();
@@ -265,64 +288,80 @@ public class BankApp {
 	}
 
 //--------------------------------------------------------------------------------------------------------//	
-	private static void giveOptionsToModifyUsers(User u) {
-		System.out.println("Enter user id to modify the user information.");
-		int choice = ensureIntegerInput();
-		User user1 = us.getUserById(choice);
-		System.out.println(user1);
-		boolean flag = true;
-		while (flag) {
-
-			System.out.println("What do you want to change?");
-			System.out.println();
-			System.out.println("Enter 0 to go back");
-			System.out.println("Enter 1 to change user First Name.");
-			System.out.println("Enter 2 to change user Last Name.");
-			System.out.println("Enter 3 to change user Password.");
-			System.out.println("Enter 4 to change user Employee Status.");
-
-			int choice1 = ensureIntegerInput();
-			switch (choice1) {
-			case 0:
-				System.out.println("Thank you for checking out.");
-				flag = false;
-				break;
-			case 1:
-				System.out.println("Please Enter the user First Name");
-				String fname = sc.nextLine();
-				user1.setFirst_name(fname);
-				us.updateUser(user1);
-				System.out.println("User's First Name is changed.");
-				break;
-			case 2:
-				System.out.println("Please Enter the user Last Name");
-				String lname = sc.nextLine();
-				user1.setFirst_name(lname);
-				us.updateUser(user1);
-				System.out.println("User's Last Name is changed.");
-				break;
-			case 3:
-				System.out.println("Please Enter the user Password");
-				String pass = sc.nextLine();
-				user1.setPassword(pass);
-				us.updateUser(user1);
-				System.out.println("User's Password is changed.");
-				break;
-			case 4:
-				System.out.println("Please Enter the user's Employee Statue T for \"True\" or F for \"False\"");
-				boolean status = false;
-				String estatus = sc.nextLine();
-				if (estatus.equalsIgnoreCase("T")) {
-					status = true;
-				}
-				user1.setEmployee(status);
-				us.updateUser(user1);
-				System.out.println("User's Employee Status is changed.");
-				break;
-			default:
-				System.out.println("There no option for your input, Please try again.");
-				break;
+//	private static void giveOptionsToModifyUsers(User u) {
+//		System.out.println("Enter user id to modify the user information.");
+//		int choice = ensureIntegerInput();
+//		User user1 = us.getUserById(choice);
+//		System.out.println(user1);
+//		boolean flag = true;
+//		while (flag) {
+//
+//			System.out.println("What do you want to change?");
+//			System.out.println();
+//			System.out.println("Enter 0 to go back");
+//			System.out.println("Enter 1 to change user First Name.");
+//			System.out.println("Enter 2 to change user Last Name.");
+//			System.out.println("Enter 3 to change user Password.");
+//			System.out.println("Enter 4 to change user Employee Status.");
+//
+//			int choice1 = ensureIntegerInput();
+//			switch (choice1) {
+//			case 0:
+//				System.out.println("Thank you for checking out.");
+//				flag = false;
+//				break;
+//			case 1:
+//				System.out.println("Please Enter the user First Name");
+//				String fname = sc.nextLine();
+//				user1.setFirst_name(fname);
+//				us.updateUser(user1);
+//				System.out.println("User's First Name is changed.");
+//				break;
+//			case 2:
+//				System.out.println("Please Enter the user Last Name");
+//				String lname = sc.nextLine();
+//				user1.setFirst_name(lname);
+//				us.updateUser(user1);
+//				System.out.println("User's Last Name is changed.");
+//				break;
+//			case 3:
+//				System.out.println("Please Enter the user Password");
+//				String pass = sc.nextLine();
+//				user1.setPassword(pass);
+//				us.updateUser(user1);
+//				System.out.println("User's Password is changed.");
+//				break;
+//			case 4:
+//				System.out.println("Please Enter the user's Employee Statue T for \"True\" or F for \"False\"");
+//				boolean status = false;
+//				String estatus = sc.nextLine();
+//				if (estatus.equalsIgnoreCase("T")) {
+//					status = true;
+//				}
+//				user1.setEmployee(status);
+//				us.updateUser(user1);
+//				System.out.println("User's Employee Status is changed.");
+//				break;
+//			default:
+//				System.out.println("There no option for your input, Please try again.");
+//				break;
+//			}
+//		}
+//	}
+	  public static boolean displayAccounts(User u) {
+		List<BankAccount> allAccountsOfUser = bs.getAccountsOfUser(u);
+		if(allAccountsOfUser.size()<=0) {
+			System.out.println("You don't have any accounts please OPEN ONE.");
+			return false;
+		}else {
+			System.out.println("Here are the list of your accounts");
+			System.out.println("=============================================================================================");
+			for(BankAccount a : allAccountsOfUser) {
+				System.out.println(a);
 			}
+			System.out.println("============================================================================================");
+			System.out.println("Please select the Account Id of the account you like." );
+			return true;
 		}
 	}
 }

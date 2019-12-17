@@ -2,8 +2,6 @@ package com.revature.models;
 
 public class BankAccount {
 
-	private int id;
-
 	public int getUserid() {
 		return userid;
 	}
@@ -17,13 +15,14 @@ public class BankAccount {
 	private int userid;
 	private int status;
 	private int pin;
+	private int id;
 
 	public BankAccount() {
 		super();
 
 	}
 
-	public BankAccount(int id, int accountNumber, double balance, int userid) {
+	public BankAccount(int id, int accountNumber, double balance, int userid,int pin,int status) {
 		this.id = id;
 		this.accountNumber = accountNumber;
 		this.balance = balance;
@@ -97,7 +96,6 @@ public class BankAccount {
 	}
 
 	public int getStatus() {
-		// TODO Auto-generated method stub
 		return status;
 	}
 	public void setStatus(int status) {
