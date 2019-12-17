@@ -122,4 +122,16 @@ public class BankAccountDAOImpl implements BankAccountDAO {
 				return true;
 	}
 
+	@Override
+	public boolean updateBalanceOfAccount(BankAccount a, double amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public BankAccount getAccountIdBYPinNumber(int pinNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

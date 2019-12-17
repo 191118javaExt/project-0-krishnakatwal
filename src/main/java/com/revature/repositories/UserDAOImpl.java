@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.revature.models.BankAccount;
 import com.revature.models.User;
 import com.revature.util.ConnectionUtil;
 
@@ -129,38 +130,106 @@ public class UserDAOImpl implements UserDAO {
 
 		return true;
 	}
-	
-	
-	public User getUserByFnameAndPassword(String fname,String password) {
+
+	public User getUserByFnameAndPassword(String fname, String password) {
 		User user = null;
-		
+
 		try (Connection con = ConnectionUtil.getConnection()) {
-				
-			String sql = "SELECT * FROM project0.users WHERE fname = ? AND password = ?;";
-			
+
+			String sql = "SELECT * FROM project0.users WHERE first_name = ? AND user_password = ?;";
+
 			PreparedStatement stmt = con.prepareStatement(sql);
-			
+
 			stmt.setString(1, fname);
 			stmt.setString(2, password);
-			
+
 			ResultSet rs = stmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				int user_id = rs.getInt("user_id");
-				String firstname = rs.getString("fname");
-				String lastname = rs.getString("lname");
-				String password1 = rs.getString("password");
+				String firstname = rs.getString("first_name");
+				String lastname = rs.getString("last_name");
+				String password1 = rs.getString("user_password");
 				boolean isEmployee = rs.getBoolean("is_employee");
 				boolean isAdmin = rs.getBoolean("is_admin");
-				user = new User(user_id, firstname, lastname, password1, isEmployee,isAdmin);
-				
+				user = new User(user_id, firstname, lastname, password1, isEmployee, isAdmin);
+
 			}
-			
+
 			rs.close();
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			logger.warn("Unable to retrieve the user by using first name and password", e);
 		}
-		//System.out.println(user);
+		// System.out.println(user);
+		return user;
+	}
+
+	@Override
+	public BankAccount getUserBankAccount(User u1) {
+
+		BankAccount account = null;
+		int accountId = u1.getAccountId();
+
+		try (Connection con = ConnectionUtil.getConnection()) {
+
+			String sql = "SELECT * FROM accounts WHERE account_id = ? ;";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, accountId);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int account_id = rs.getInt("account_id");
+
+				int accountNumber = rs.getInt("account_number");
+				double balance = rs.getDouble("balance");
+
+				int pin = rs.getInt("pin_number");
+
+				account = new BankAccount(account_id, accountNumber, balance, pin);
+
+			}
+
+			rs.close();
+		} catch (SQLException e) {
+			logger.warn("Unable to retrieve user's account", e);
+		}
+
+		return account;
+	}
+
+	@Override
+	public User getUserById(int id) {
+
+		User user = null;
+
+		try (Connection con = ConnectionUtil.getConnection()) {
+
+			String sql = "SELECT * FROM users WHERE user_id = ? ;";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int user_id = rs.getInt("user_id");
+				String fname = rs.getString("fname");
+				String lname = rs.getString("lname");
+				String password = rs.getString("password");
+
+				boolean isEmployee = rs.getBoolean("is_employee");
+				boolean isAdmin = rs.getBoolean("is_admin");
+
+				user = new User(user_id, fname, lname, password, isEmployee, isAdmin);
+
+			}
+
+			rs.close();
+		} catch (SQLException e) {
+			logger.warn("Unable to retrieve the user", e);
+		}
 		return user;
 	}
 

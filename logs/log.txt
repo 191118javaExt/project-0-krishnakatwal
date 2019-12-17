@@ -40,3 +40,35 @@ org.postgresql.util.PSQLException: ERROR: relation "users" does not exist
 	at com.revature.BankApp.findUser(BankApp.java:31)
 	at com.revature.BankApp.start(BankApp.java:19)
 	at com.revature.Driver.main(Driver.java:9)
+2019-12-17 08:59:11 WARN  UserDAOImpl:161 - Unable to retrieve the user by using first name and password
+org.postgresql.util.PSQLException: ERROR: column "fname" does not exist
+  Position: 36
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:108)
+	at com.revature.repositories.UserDAOImpl.getUserByFnameAndPassword(UserDAOImpl.java:146)
+	at com.revature.services.UserService.getUserByFnameAndPassword(UserService.java:33)
+	at com.revature.BankApp.findUserInDB(BankApp.java:221)
+	at com.revature.BankApp.findUser(BankApp.java:34)
+	at com.revature.BankApp.start(BankApp.java:19)
+	at com.revature.Driver.main(Driver.java:10)
+2019-12-17 09:04:41 WARN  UserDAOImpl:161 - Unable to retrieve the user by using first name and password
+org.postgresql.util.PSQLException: ERROR: column "password" does not exist
+  Position: 56
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:108)
+	at com.revature.repositories.UserDAOImpl.getUserByFnameAndPassword(UserDAOImpl.java:146)
+	at com.revature.services.UserService.getUserByFnameAndPassword(UserService.java:33)
+	at com.revature.BankApp.findUserInDB(BankApp.java:221)
+	at com.revature.BankApp.findUser(BankApp.java:34)
+	at com.revature.BankApp.start(BankApp.java:19)
+	at com.revature.Driver.main(Driver.java:10)

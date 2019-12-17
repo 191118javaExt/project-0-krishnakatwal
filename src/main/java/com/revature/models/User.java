@@ -134,4 +134,14 @@ public class User {
 				+ ", isEmployee=" + isEmployee + ", isAdmin=" + isAdmin + "]";
 	}
 
+	public int getStatus() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getAccountId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

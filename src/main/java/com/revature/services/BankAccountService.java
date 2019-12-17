@@ -25,5 +25,14 @@ public class BankAccountService {
 	boolean deleteBankAccount(BankAccount b) {
 		return repository.deleteBankAccount(b);
 	}
+
+	public boolean updateBalanceOfAccount(BankAccount a, double amount) {
+		return repository.updateBalanceOfAccount(a, amount);
+		
+	}
+
+	public BankAccount getAccountBYPinNumber(int pinNumber) {
+		return repository.getAccountIdBYPinNumber(pinNumber);
+	}
 	
 }

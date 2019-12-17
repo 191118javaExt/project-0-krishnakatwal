@@ -14,4 +14,9 @@ public interface BankAccountDAO {
 
 	boolean deleteBankAccount(BankAccount b);
 
+	public boolean updateBalanceOfAccount(BankAccount a, double amount);
+
+	BankAccount getAccountIdBYPinNumber(int pinNumber);
+		
+	
 }

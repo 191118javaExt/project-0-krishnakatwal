@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.util.List;
 
+import com.revature.models.BankAccount;
 import com.revature.models.User;
 import com.revature.repositories.UserDAO;
 import com.revature.repositories.UserDAOImpl;
@@ -28,7 +29,18 @@ public class UserService {
 	}
 
 	public User getUserByFnameAndPassword(String fname, String password) {
-		// TODO Auto-generated method stub
+	
 		return repository.getUserByFnameAndPassword(fname, password);
+	}
+
+
+	public BankAccount getUserBankAccount(User u1) {
+		
+		return repository .getUserBankAccount(u1);
+	}
+
+	public User getUserById(int choice) {
+		
+		return repository.getUserById(choice);
 	}
 }

@@ -1,11 +1,10 @@
 package com.revature;
 
-//import java.util.Scanner;
-
 public class Driver {
 	public static void main(String[] args) {
 		
 	BankApp app = new BankApp();
+	System.out.println("WELCOME TO BANKAPP");
 		app.start();
 
 	}

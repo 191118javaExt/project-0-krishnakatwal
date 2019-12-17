@@ -15,6 +15,8 @@ public class BankAccount {
 	private int accountNumber;
 	private double balance;
 	private int userid;
+	private int status;
+	private int pin;
 
 	public BankAccount() {
 		super();
@@ -92,6 +94,22 @@ public class BankAccount {
 	public String toString() {
 		return "BankAccount [id=" + id + ", accountNumber=" + accountNumber + ", balance=" + balance + ", userid="
 				+ userid + "]";
+	}
+
+	public int getStatus() {
+		// TODO Auto-generated method stub
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getPin() {
+		return pin;
+	}
+
+	public void setPin(int pin) {
+		this.pin = pin;
 	}
 
 }
