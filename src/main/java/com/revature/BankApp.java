@@ -28,7 +28,8 @@ public class BankApp {
 			int input = Integer.parseInt(sc.nextLine());
 			switch (input) {
 			case 1:
-				u = forNewUser();
+				u = forNewUser();// apply for the NewAccount//
+				
 				us.addUser(u);
 				break;
 			case 2:
@@ -52,6 +53,41 @@ public class BankApp {
 
 	}
 
+	private static User forNewUser() {
+		System.out.println(" =====Your First Name:===== ");
+		System.out.println("\n");
+		String firstname = sc.nextLine();
+
+		System.out.println(" ====YourLast Name:===== ");
+		System.out.println("\n");
+		String lastname = sc.nextLine();
+
+		System.out.println("===Password:====");
+		System.out.println("\n");
+		String password1 = sc.nextLine();
+		System.out.println("");
+
+		System.out.println("====Re-enter Password:====");
+		System.out.println("\n");
+		String password2 = sc.nextLine();
+
+		System.out.println("Are you an Employee? Please Enter Yes or No");
+		String input = sc.nextLine();
+		boolean isemployee = false;
+		if (input.equalsIgnoreCase("Yes")) {
+			isemployee = true;
+		}
+		System.out.println("Are you an Admin? Please Enter Yes or No");
+		String input1 = sc.nextLine();
+		boolean isadmin = false;
+		if (input1.equalsIgnoreCase("Yes")) {
+			isadmin = true;
+		}
+
+		return new User(0, firstname, lastname, password1, isemployee, isadmin);
+	}
+
+	
 	private static void logIn(User u1) {
 
 		System.out.println("Enter 1 to Exist");
@@ -60,7 +96,7 @@ public class BankApp {
 		System.out.println("Enter 4 to Transfer ");
 		System.out.println();
 
-		int option = Integer.parseInt(sc.nextLine());
+		int option = Integer.parseInt(sc.nextLine());//convert String to Integer
 		;
 		switch (option) {
 		case 1:
@@ -82,7 +118,6 @@ public class BankApp {
 		}
 	}
 
-//----------------------------------------------------------------------------------------------------------//
 	private static void transfer(User u1) {
 		displayAccounts(u1);
 		System.out.println("Enter Account id to which you want to deposit.");
@@ -117,16 +152,17 @@ public class BankApp {
 				BankAccount a1 = us.getUserBankAccount(u1);
 				System.out.println("Congratulation you successfully transfered $" + amount
 						+ " to another account with account number " + anotherAccount.getAccountNumber());
-				System.out.println("And your current balance is $" + a1.getBalance());
+				
 			}
 		}
 
 	}
 
-//------------------------------------------------------------------------------------------?//
+
 	private static int ensureIntegerInput(String input) {
 		System.out.println("Enter "+ input);
 		int choice = 0;
+//		Reads a String value from the user//
 		String ch = sc.nextLine();
 		try {
 			
@@ -140,7 +176,6 @@ public class BankApp {
 		return choice;
 	}
 
-	// -----------------------------------------------------------------------------------------------------------//
 	private static void withdraw(User u1) {
 		displayAccounts(u1);
 		System.out.println("Enter Account id to which you want to deposit.");
@@ -164,13 +199,12 @@ public class BankApp {
 				bs.updateBalanceOfAccount(a, (-1 * amount));
 			}
 			
-			System.out.println("Congratulation you successfully withdrew $" + amount + " and your current balance is $"
-					+ a.getBalance());
+			System.out.println("Congratulation you successfully withdrew $" + amount );
 		}
 
 	}
 
-//-------------------------------------------------------------------------------------------------------------------------------//
+
 	private static void deposit(User u1) {
 		displayAccounts(u1);
 		System.out.println("Enter Account id to which you want to deposit.");
@@ -192,30 +226,27 @@ public class BankApp {
 			} else {
 
 				bs.updateBalanceOfAccount(a, amount);
-				
 				System.out.println("Congratulation you successfully deposited $" + amount
-						+ " and your current balance is $" + a.getBalance());
+						);
 			}
 
 		}
 	}
 
-//========================================================================================================//
 	private static double ensureDoubleInput() {
 		// TODO Auto-generated method stub
 		String amt = sc.nextLine();
 		double amount = 0.0;
 		try {
-			amount = Double.parseDouble(amt);
+			amount = Double.parseDouble(amt);//returns the double value 
 		} catch (NumberFormatException e) {
 			System.out.println("Couldn't convert the transfer amount");
-			e.printStackTrace();
+			e.printStackTrace();//trace the exception.help the progarmmer to trace the error.
 		}
 		return amount;
 
 	}
 
-//=========================================================================================================//
 	private static boolean checkUserInDB(User et) {
 		boolean flag = false;
 
@@ -230,14 +261,13 @@ public class BankApp {
 		return flag;
 	}
 
-//=======================================================================================================//
 	private static User findUserInDB() {
 		String fname;
 		String password;
 		User u;
 		do {
 			System.out.println("Enter your first name: ");
-			System.out.println("\n");
+			//System.out.println("\n");
 			fname = sc.nextLine();
 			System.out.println("Enter your password: ");
 			password = sc.nextLine();
@@ -248,106 +278,18 @@ public class BankApp {
 		return u;
 	}
 
-	// ======================================================================================//
-	private static User forNewUser() {
-		System.out.println(" Your First Name: ");
-		String firstname = sc.nextLine();
 
-		System.out.println(" YourLast Name: ");
-		String lastname = sc.nextLine();
-
-		System.out.println("Password:");
-		String password1 = sc.nextLine();
-		System.out.println("");
-
-		System.out.println("Re-enter Password:");
-		String password2 = sc.nextLine();
-
-		System.out.println("Are you an Employee? Please Enter Yes or No");
-		String input = sc.nextLine();
-		boolean isemployee = false;
-		if (input.equalsIgnoreCase("Yes")) {
-			isemployee = true;
-		}
-		System.out.println("Are you an Admin? Please Enter Yes or No");
-		String input1 = sc.nextLine();
-		boolean isadmin = false;
-		if (input1.equalsIgnoreCase("Yes")) {
-			isadmin = true;
-		}
-
-		return new User(0, firstname, lastname, password1, isemployee, isadmin);
-	}
-
-//===================================================================================\\
 	private static void options() {
 		System.out.println("Options: ");
 		System.out.println("====Please Enter 1 for New User:====");
-		System.out.println("===Enter 2 for the existing User:==");
-		System.out.println("==Enter 3 for exit:====");
+		//System.out.println("\n");
+		System.out.println("====Enter 2 for the Existing User:==");
+		//System.out.println("\n");
+		System.out.println("====Enter 3 for Exit:===============");
+		//System.out.println("\n");
 	}
 
-//--------------------------------------------------------------------------------------------------------//	
-//	private static void giveOptionsToModifyUsers(User u) {
-//		System.out.println("Enter user id to modify the user information.");
-//		int choice = ensureIntegerInput();
-//		User user1 = us.getUserById(choice);
-//		System.out.println(user1);
-//		boolean flag = true;
-//		while (flag) {
-//
-//			System.out.println("What do you want to change?");
-//			System.out.println();
-//			System.out.println("Enter 0 to go back");
-//			System.out.println("Enter 1 to change user First Name.");
-//			System.out.println("Enter 2 to change user Last Name.");
-//			System.out.println("Enter 3 to change user Password.");
-//			System.out.println("Enter 4 to change user Employee Status.");
-//
-//			int choice1 = ensureIntegerInput();
-//			switch (choice1) {
-//			case 0:
-//				System.out.println("Thank you for checking out.");
-//				flag = false;
-//				break;
-//			case 1:
-//				System.out.println("Please Enter the user First Name");
-//				String fname = sc.nextLine();
-//				user1.setFirst_name(fname);
-//				us.updateUser(user1);
-//				System.out.println("User's First Name is changed.");
-//				break;
-//			case 2:
-//				System.out.println("Please Enter the user Last Name");
-//				String lname = sc.nextLine();
-//				user1.setFirst_name(lname);
-//				us.updateUser(user1);
-//				System.out.println("User's Last Name is changed.");
-//				break;
-//			case 3:
-//				System.out.println("Please Enter the user Password");
-//				String pass = sc.nextLine();
-//				user1.setPassword(pass);
-//				us.updateUser(user1);
-//				System.out.println("User's Password is changed.");
-//				break;
-//			case 4:
-//				System.out.println("Please Enter the user's Employee Statue T for \"True\" or F for \"False\"");
-//				boolean status = false;
-//				String estatus = sc.nextLine();
-//				if (estatus.equalsIgnoreCase("T")) {
-//					status = true;
-//				}
-//				user1.setEmployee(status);
-//				us.updateUser(user1);
-//				System.out.println("User's Employee Status is changed.");
-//				break;
-//			default:
-//				System.out.println("There no option for your input, Please try again.");
-//				break;
-//			}
-//		}
-//	}
+
 	  public static boolean displayAccounts(User u) {
 		List<BankAccount> allAccountsOfUser = bs.getAccountsOfUser(u);
 		if(allAccountsOfUser.size()<=0) {

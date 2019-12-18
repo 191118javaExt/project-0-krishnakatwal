@@ -163,42 +163,7 @@ public class UserDAOImpl implements UserDAO {
 		// System.out.println(user);
 		return user;
 	}
-//
-//	@Override
-//	public BankAccount getUserBankAccount(User u1) {
-//
-//		BankAccount account = null;
-//		int accountId = u1.getAccountId();
-//
-//		try (Connection con = ConnectionUtil.getConnection()) {
-//
-//			String sql = "SELECT * FROM bankaccount WHERE account_id = ? ;";
-//
-//			PreparedStatement stmt = con.prepareStatement(sql);
-//			stmt.setInt(1, accountId);
-//
-//			ResultSet rs = stmt.executeQuery();
-//
-//			while (rs.next()) {
-//				int accountid = rs.getInt("account_id");
-//
-//				int accountNumber = rs.getInt("account_number");
-//				double balance = rs.getDouble("balance");
-//
-//				int pin = rs.getInt("pin_number");
-//				int status = rs.getInt("status");
-//
-//				account = new BankAccount(accountid, accountNumber, balance, pin, status, 0);
-//
-//			}
-//
-//			rs.close();
-//		} catch (SQLException e) {
-//			logger.warn("Unable to retrieve user's account", e);
-//		}
-//
-//		return account;
-//	}
+
 
 	@Override
 	public User getUserById(int id) {

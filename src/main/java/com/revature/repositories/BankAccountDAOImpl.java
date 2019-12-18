@@ -137,20 +137,23 @@ public class BankAccountDAOImpl implements BankAccountDAO {
 		int id = a.getId();
 		int number = a.getAccountNumber();
 		double balance = a.getBalance() + amount;
+		int user_id = a.getUserid();
 		int pin = a.getPin();
 		int status = a.getStatus();
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			
 			
-			String sql = "UPDATE project0.BankAccount SET  account_number = ?, balance = ?,pin = ?, status = ? WHERE account_id = ?;"; 
+			String sql = "UPDATE project0.BankAccount SET account_id =?, account_number = ?, balance = ?, user_id = ?, status = ?,pin = ? WHERE account_id = ?;"; 
 					
 			
 			PreparedStatement stm = conn.prepareStatement(sql);
 			stm.setInt(1,id);
 			stm.setInt(2, number);
 			stm.setDouble(3, balance);
-			stm.setInt(4, pin);
+			stm.setInt(4, user_id);
 			stm.setInt(5, status);
+			stm.setInt(6, pin);
+			stm.setInt(7, id);
 			if(!stm.execute()) {
 				return false;
 			}
@@ -171,7 +174,7 @@ public class BankAccountDAOImpl implements BankAccountDAO {
 		List<BankAccount> list = new ArrayList<>();
 		int id = u.getId(); 
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			System.out.println("I am here");
+			//System.out.println("I am here");
 			String sql = "SELECT * FROM project0.BankAccount where user_id = ?;";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);

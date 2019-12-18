@@ -19,12 +19,10 @@ public interface BankAccountDAO {
 
 	public BankAccount getAccountIdBYPin(int pin);
 
-	 public List<BankAccount> getAllAccountofUser(User u);
+	public List<BankAccount> getAllAccountofUser(User u);
 
 	BankAccount getAccountById(int id);
 
 	List<BankAccount> getAccountsOfUser(User u);
 
-		
-	
 }
